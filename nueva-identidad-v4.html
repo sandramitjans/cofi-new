@@ -1,22 +1,82 @@
-/* ── VÍDEO CORREGIDO ────────────────────────────────────────── */
-(function () {
-  const videoWrapper = document.getElementById('videoWrapper');
-  const playBtn = document.getElementById('playBtn');
-  
-  if (!videoWrapper || !playBtn) return;
+/* Altura del header para que se vea el hombre */
+.hero-wrapper {
+    background: url('/es/img/pp-promo/header-desktop.webp') no-repeat center bottom;
+    background-size: cover;
+    height: 600px; /* Ajustado para que el hombre no quede tapado */
+}
 
-  playBtn.addEventListener('click', () => {
-    // 1. Añadimos la clase que oculta miniatura y botón vía CSS
-    videoWrapper.classList.add('playing');
-    
-    // 2. Inyectamos el iframe
-    // Usamos autoplay=1 y mute=1 (opcional) para asegurar que el navegador permita el auto-inicio
-    videoWrapper.innerHTML = `
-      <iframe 
-        src="https://www.youtube.com/embed/A3pOZF1oC4E?autoplay=1&rel=0&modestbranding=1" 
-        title="YouTube video player" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-        allowfullscreen>
-      </iframe>`;
-  });
-})();
+.oferta-svg {
+    position: absolute;
+    top: 50px;
+    left: 15px;
+    max-width: 280px;
+}
+
+/* El truco: La sección de interacción sube, pero las columnas son independientes */
+.interaction-area {
+    margin-top: -400px; /* Sube el conjunto sobre la imagen */
+    position: relative;
+    z-index: 20;
+}
+
+.simulator-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    /* Al ser fluido, tomará el ancho de la columna col-lg-5 */
+}
+
+/* Alineación del legal en desktop para que no flote demasiado alto */
+@media (min-width: 992px) {
+    .legal-box {
+        margin-top: 350px; /* Alinea el inicio del legal con la base del hombre */
+    }
+}
+
+/* Ajustes Responsive para Tablet y Mobile */
+@media (max-width: 991px) {
+    .hero-wrapper {
+        background-image: url('/es/img/pp-promo/home-header-tablet.webp');
+        height: 500px;
+    }
+    .interaction-area { margin-top: -200px; }
+    .legal-box { margin-top: 20px; } /* En móvil el legal va debajo del simulador */
+}
+
+@media (max-width: 767px) {
+    .hero-wrapper {
+        background-image: url('/es/img/pp-promo/home-header-mobile.webp');
+        height: 480px;
+    }
+    .oferta-svg { max-width: 180px; top: 20px; }
+}
+
+<div class="coes">
+  <header class="hero-wrapper position-relative">
+    <div class="container h-100 position-relative">
+      <div class="oferta-svg">
+        <img src="oferta.svg" alt="Oferta 4,75% TAE" class="img-fluid">
+      </div>
+    </div>
+  </header>
+
+  <section class="interaction-area">
+    <div class="container">
+      <div class="row align-items-start">
+        
+        <div class="col-lg-6 col-12 order-2 order-lg-1 mt-lg-5">
+          <div class="legal-box pt-xl-5">
+            <p class="small">@TEXTO_LEGAL_POLITICA_GOOGLE_RV@</p>
+            <p class="small">@TEXTO_LEGAL_POLITICA_GOOGLE_PP@</p>
+          </div>
+        </div>
+
+        <div class="col-lg-5 offset-lg-1 col-12 order-1 order-lg-2">
+          <div id="simulador" class="simulator-card shadow-lg">
+            #I0# </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
