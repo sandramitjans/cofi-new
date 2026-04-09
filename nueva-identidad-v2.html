@@ -1,0 +1,852 @@
+<head>
+<title>Nueva Identidad</title>
+<link rel="stylesheet" href="/es/css/splide-core.min.css">
+</head>
+<style>
+/* ══════════════════════════════════════════════════════════
+   VARIABLES & BASE
+   ══════════════════════════════════════════════════════════ */
+:root {
+--cofidis-red:   #e2001a;
+--cofidis-dark:  #1a1a1a;
+--cofidis-light: #f8f4f0;
+--ease-smooth:   cubic-bezier(0.4, 0, 0.2, 1);
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    overflow-x: hidden;
+}
+/* ══════════════════════════════════════════════════════════
+   REVEAL
+   ══════════════════════════════════════════════════════════ */
+.reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.75s var(--ease-smooth), transform 0.75s var(--ease-smooth);
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* ══════════════════════════════════════════════════════════
+   1. HERO
+   ══════════════════════════════════════════════════════════ */
+#hero {
+    height: 600px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+#hero .hero-bg-img {
+    position: absolute;
+    inset: 0;
+    background-image: url('/es/img/conocenos/hero-nuevo-logo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+.hero-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+.hero-title {
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #fff;
+    animation: heroIn 1s .1s var(--ease-smooth) both;
+}
+.hero-subtitle {
+    font-size: 24px;
+    line-height: 36px;
+    color: rgba(255,255,255,.82);
+    margin-top: 1rem;
+    animation: heroIn 1s .3s var(--ease-smooth) both;
+}
+@keyframes heroIn {
+from {
+opacity: 0;
+transform: translateY(20px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+.hero-bottom {
+    position: relative;
+    z-index: 2;
+    padding-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+    animation: heroIn 1s .5s var(--ease-smooth) both;
+}
+.hero-cta-text {
+    color: rgba(255,255,255,.9);
+    font-weight: 600;
+    font-size: .95rem;
+    text-decoration: none;
+}
+.hero-arrow {
+    display: flex;
+    align-items: center;
+    color: rgba(255,255,255,.85);
+    animation: arrowBounce 2s ease-in-out infinite;
+    text-decoration: none;
+}
+@keyframes arrowBounce {
+0%, 100% {
+transform: translateY(0);
+}
+50% {
+transform: translateY(8px);
+}
+}
+/* ══════════════════════════════════════════════════════════
+   2. VÍDEO
+   ══════════════════════════════════════════════════════════ */
+#video-section {
+    background: #fff;
+    padding: clamp(60px, 8vw, 100px) 0;
+}
+.video-wrapper {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.video-thumb-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-image: url('https://img.youtube.com/vi/A3pOZF1oC4E/maxresdefault.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.video-thumb-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.25);
+}
+.video-thumb-placeholder svg {
+    opacity: 0;
+}
+.play-btn {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .3s;
+}
+.play-btn-inner {
+    width: clamp(64px, 9vw, 96px);
+    height: clamp(64px, 9vw, 96px);
+    border-radius: 50%;
+    background: rgba(226,0,26,.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .25s, box-shadow .25s;
+}
+.video-wrapper:hover .play-btn-inner {
+    transform: scale(1.08);
+}
+.play-btn-inner svg {
+    margin-left: 5px;
+}
+.video-wrapper.playing .play-btn {
+    opacity: 0;
+    pointer-events: none;
+}
+#theVideo {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: none;
+}
+
+@media (max-width: 575px) {
+.video-thumb-placeholder {
+    width: 100%;
+    background-image: url('https://img.youtube.com/vi/A3pOZF1oC4E/maxresdefault.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.scroll-sticky {
+    position: sticky;
+    top: 80px !important;
+    height: calc(100vh - 148px);
+    overflow: hidden;
+}
+}
+/* ══════════════════════════════════════════════════════════
+   3. MÁS DE 35 AÑOS – LOGOS
+   ══════════════════════════════════════════════════════════ */
+.historia-title {
+    font-size: clamp(2.5rem, 3.5vw, 3rem);
+    font-weight: 800;
+    margin-bottom: .4rem;
+    text-align: left;
+}
+.historia-subtitle {
+    color: #666;
+    font-size: 1.2rem;
+    margin-bottom: clamp(3rem, 5vw, 5rem);
+    text-align: left;
+}
+.logos-stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.logo-year {
+    flex-direction: column;
+    align-items: center;
+    gap: .75rem;
+    opacity: 0;
+    transform: translateY(24px) scale(.94);
+    transition: opacity 1s var(--ease-smooth), transform 1s var(--ease-smooth);
+}
+.logo-year.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+.logo-img-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo-img-wrap img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+.logo-year-label {
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    color: #aaa;
+}
+
+@media (max-width: 575px) {
+.logo-mvl-1, .logo-mvl-3 {
+    height: 160px !important;
+}
+.logo-mvl-2 {
+    height: 130px !important;
+}
+.logo-mvl-3 {
+    height: 100px !important;
+}
+}
+/* ══════════════════════════════════════════════════════════
+   4. SCROLL STORY
+   ══════════════════════════════════════════════════════════ */
+#scroll-story {
+    position: relative;
+    height: 300vh;
+}
+.scroll-sticky {
+    position: sticky;
+    top: 148px;
+    height: calc(100vh - 148px);
+    overflow: hidden;
+}
+.story-text-overlay {
+    position: absolute;
+    top: clamp(2rem, 5vh, 3.5rem);
+    z-index: 20;
+}
+.story-step {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity .5s var(--ease-smooth), transform .5s var(--ease-smooth);
+    pointer-events: none;
+}
+.story-step.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    position: relative;
+}
+.story-step h2 {
+    font-size: 2.7rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: .6rem;
+    color: var(--cofidis-dark);
+}
+.story-step p {
+    color: #555;
+    font-size: 1.2rem;
+    margin: 0;
+}
+.circle-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    top: 100px;
+}
+.circle-mask-wrap {
+    position: relative;
+    width: clamp(260px, 42vmin, 500px);
+    height: clamp(260px, 42vmin, 500px);
+}
+.circle-viewport {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: visible;
+    position: relative;
+    background: #f4f4f4;
+    border: 1px solid #d8d8d8;
+}
+.circle-mask-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 0 500vmax rgba(255,255,255,0.5);
+    pointer-events: none;
+    z-index: 10;
+}
+#logoFull {
+    position: absolute;
+    height: 125%;
+    width: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-20%, -50%);
+    transition: transform 1s var(--ease-smooth);
+}
+
+@media (max-width: 575px) {
+#scroll-story {
+    height: 350vh;
+}
+.story-text-overlay {
+    max-width: 90vw;
+    left: 1.25rem;
+}
+.hero-subtitle {
+    font-size: 20px;
+    line-height: 30px;
+    color: rgba(255,255,255,.82);
+    margin-top: 1rem;
+    animation: heroIn 1s .3s var(--ease-smooth) both;
+}
+}
+/* ══════════════════════════════════════════════════════
+   SECCIÓN
+   ══════════════════════════════════════════════════════ */
+#canales {
+    padding: clamp(60px, 8vw, 100px) 0;
+    background: #fff;
+}
+/* ══════════════════════════════════════════════════════
+   LISTA DE CANALES (acordeón)
+   ══════════════════════════════════════════════════════ */
+.canal-item {
+    border-bottom: 1px solid #e8e8e8;
+}
+.canal-item:first-child {
+    border-top: 1px solid #e8e8e8;
+}
+.canal-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    background: transparent;
+    border: 0;
+    text-align: left;
+    cursor: pointer;
+    color: var(--cofidis-dark);
+}
+.canal-trigger:focus-visible {
+outline: 2px solid var(--cofidis-red);
+outline-offset: 2px;
+border-radius: 4px;
+}
+/* Número + nombre */
+.canal-num {
+    font-size: .8rem;
+    font-weight: 700;
+    color: #bbb;
+    min-width: 1.5rem;
+    letter-spacing: .04em;
+    transition: color .25s;
+}
+.canal-trigger.is-active .canal-num {
+    color: var(--cofidis-red);
+}
+.canal-name {
+    font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+    font-weight: 600;
+    line-height: 1.2;
+    transition: color .25s;
+}
+.canal-trigger.is-active .canal-name {
+    color: var(--cofidis-red);
+}
+/* Chevron */
+.canal-chevron {
+    flex-shrink: 0;
+    color: #999;
+    transition: transform .35s var(--ease-smooth), color .25s;
+}
+.canal-trigger.is-active .canal-chevron {
+    transform: rotate(180deg);
+    color: var(--cofidis-red);
+}
+/* ── Cuerpo colapsable (grid trick) ── */
+.canal-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .4s var(--ease-smooth);
+}
+.canal-body.is-open {
+    grid-template-rows: 1fr;
+}
+.canal-body-inner {
+    overflow: hidden;
+}
+.canal-body-content {
+    padding-bottom: 1.5rem;
+}
+.canal-desc {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.65;
+    margin: 0 0 1.25rem;
+}
+/* ── Imagen mobile (dentro del acordeón) ── */
+.canal-img-mobile {
+    border-radius: 12px;
+    overflow: hidden;/* El display lo controla el media query */
+}
+.canal-img-mobile img {
+    width: 100%;
+    display: block;
+    border-radius: 12px;
+}
+/* ══════════════════════════════════════════════════════
+   PANEL IMAGEN DESKTOP (columna derecha)
+   ══════════════════════════════════════════════════════ */
+.canal-panel {
+    position: relative;
+    /* Mínimo igual a la altura del acordeón para no colapsar */
+    min-height: clamp(300px, 40vw, 520px);
+}
+.canal-slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .5s var(--ease-smooth), transform .5s var(--ease-smooth);
+    pointer-events: none;
+}
+.canal-slide.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+.canal-slide img {
+    width: 100%;
+    max-height: clamp(300px, 40vw, 520px);
+    object-fit: contain;
+    border-radius: 16px;
+    display: block;
+}
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════ */
+
+/* Mobile: ocultar panel derecho, mostrar imagen inline */
+@media (max-width: 767px) {
+.canal-panel-col {
+    display: none !important;
+}
+.canal-img-mobile {
+    display: block;
+}
+}
+
+/* Desktop: ocultar imágenes mobile, mostrar panel derecho */
+@media (min-width: 768px) {
+.canal-img-mobile {
+    display: none !important;
+}
+.canal-panel-col {
+    display: block;
+}
+}
+
+@media (max-width: 768px) {
+.coes .xl {
+    font-size: 3rem !important;
+    line-height: 3.5rem !important;
+    letter-spacing: -0.576px;
+}
+}
+</style>
+
+<!-- ══════════════════════════════════════════════════════════
+     HTML
+     ══════════════════════════════════════════════════════════ -->
+<div class="coes"> 
+  
+  <!-- 1. HERO -->
+  <section id="hero">
+    <div class="hero-bg-img"></div>
+    <div class="hero-body">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-9 col-lg-9">
+            <h1 class="xl text-white">Nueva identidad,<br>
+              el compromiso de siempre</h1>
+            <p class="hero-subtitle text-white pt-3">Tras más de tres décadas de historia y adaptación a cada momento, así se ve el Cofidis de hoy.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-bottom"> <a href="#video-section" class="hero-cta-text">Descubre nuestra evolución</a> <a href="#video-section" class="hero-arrow" aria-label="Ir hacia abajo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+      </a> </div>
+  </section>
+  
+  <!-- 2. VÍDEO -->
+  <section id="video-section">
+    <div class="container">
+      <div class="video-wrapper reveal" id="videoWrapper">
+        <div class="video-thumb-placeholder">
+          <svg width="90" height="90" viewBox="0 0 24 24" fill="#aaa">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+          </svg>
+        </div>
+        <div class="play-btn" id="playBtn">
+          <div class="play-btn-inner">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
+          </div>
+        </div>
+        <!-- SUSTITUIR: reemplaza "video-cofidis.mp4" por la ruta real del vídeo -->
+        <iframe id="theVideo" width="100%" height="100%" src="https://www.youtube.com/embed/A3pOZF1oC4E?si=iKkew3FKO0Q90bsy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+  
+  <!-- 3. MÁS DE 35 AÑOS – LOGOS -->
+  <section class="py-5 bg-white" id="logosStage">
+    <div class="container mb-5">
+      <div class="row mb-5">
+        <div class="col-12">
+          <h2 class="historia-title pb-2 reveal">Más de 35 años en España</h2>
+          <p class="historia-subtitle reveal">Estrenamos un nuevo ciclo, sin perder de vista nuestra historia y lo que nos ha llevado al Cofidis de hoy</p>
+        </div>
+      </div>
+      <div class="logos-stage row text-center g-5">
+        <div class="col-12 col-md-4">
+          <div class="logo-year d-flex flex-column align-items-center" data-delay="0">
+            <div class="logo-img-wrap logo-mvl-1 d-flex align-items-center justify-content-center mb-2" style="height:120px;"> <img src="/es/img/conocenos/logo-cofidis-1997.png" alt="Logo Cofidis 1997" style="max-height:100%;width:auto;object-fit:contain;"> </div>
+            <h3 class="fw-semibold fs-5 fs-md-4 mb-3" style="color:#453A3B;">1997</h3>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="logo-year  flex-column align-items-center" data-delay="1">
+            <div class="logo-img-wrap logo-mvl-2 d-flex align-items-center justify-content-center mb-2" style="height:120px;"> <img src="/es/img/logo-2012.svg" alt="Logo Cofidis 2012" style="max-height:100%;width:auto;object-fit:contain;"> </div>
+            <h3 class="fw-semibold fs-5 fs-md-4 mb-3" style="color:#453A3B;">2012</h3>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="logo-year d-flex flex-column align-items-center" data-delay="2">
+            <div class="logo-img-wrap logo-mvl-3 d-flex align-items-center justify-content-center mb-2" style="height:120px;"> <img src="/es/img/logo-2026.svg" alt="Logo Cofidis 2026" style="max-height:100%;width:180px;object-fit:contain;"> </div>
+            <h3 class="fw-semibold fs-5 fs-md-4 mb-3" style="color:#453A3B;">2026</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section> #I0# </section>
+  <section id="canales">
+    <div class="container"> 
+      
+      <!-- Cabecera -->
+      <div class="row mb-4 mb-md-5">
+        <div class="col-12">
+          <h2 class="fw-semibold fs-1 mb-1">En todos los canales</h2>
+          <p class="text-secondary mb-0">Cambiamos, pero seguimos acompañándote desde nuestros canales usuales</p>
+        </div>
+      </div>
+      <div class="row align-items-start g-4 g-md-5"> 
+        
+        <!-- ── Columna acordeón ── -->
+        <div class="col-12 col-md-5">
+          <ul class="list-unstyled mb-0" id="canalList" role="list">
+            
+            <!-- APP -->
+            <li class="canal-item">
+              <button
+              class="canal-trigger is-active"
+              data-target="app"
+              aria-expanded="true"
+              aria-controls="body-app"> <span class="d-flex align-items-center gap-3"> <span class="canal-name">App</span> </span>
+              <svg class="canal-chevron" width="22" height="22" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+              </button>
+              <div class="canal-body is-open" id="body-app" role="region" aria-labelledby="trigger-app">
+                <div class="canal-body-inner">
+                  <div class="canal-body-content">
+                    <p class="canal-desc"> Nuestro isotipo gana protagonismo también en la App, con un diseño renovado
+                      que mantiene la experiencia que ya conoces. </p>
+                    <!-- Imagen solo visible en mobile -->
+                    <div class="canal-img-mobile"> 
+                      <!-- Sustituir: /es/img/conocenos/app_logo_mobile.webp --> 
+                      <img src="/es/img/conocenos/app_logo_mobile.webp" alt="App Cofidis nueva imagen" loading="lazy"> </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            
+            <!-- EMAIL -->
+            <li class="canal-item">
+              <button
+              class="canal-trigger"
+              data-target="email"
+              aria-expanded="false"
+              aria-controls="body-email"> <span class="d-flex align-items-center gap-3"> <span class="canal-name">Email</span> </span>
+              <svg class="canal-chevron" width="22" height="22" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+              </button>
+              <div class="canal-body" id="body-email" role="region" aria-labelledby="trigger-email">
+                <div class="canal-body-inner">
+                  <div class="canal-body-content">
+                    <p class="canal-desc"> Comunicaciones más claras y visuales. La nueva identidad llega también
+                      a tu bandeja de entrada con un diseño más moderno. </p>
+                    <div class="canal-img-mobile"> 
+                      <!-- Sustituir: /es/img/conocenos/email_logo_mobile.webp --> 
+                      <img src="/es/img/conocenos/email_logo_mobile.webp" alt="Email Cofidis nueva imagen" loading="lazy"> </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            
+            <!-- REDES SOCIALES -->
+            <li class="canal-item" style="border-bottom:0;">
+              <button
+              class="canal-trigger"
+              data-target="rrss"
+              aria-expanded="false"
+              aria-controls="body-rrss"> <span class="d-flex align-items-center gap-3"> <span class="canal-name">Redes Sociales</span> </span>
+              <svg class="canal-chevron" width="22" height="22" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+              </button>
+              <div class="canal-body" id="body-rrss" role="region" aria-labelledby="trigger-rrss">
+                <div class="canal-body-inner">
+                  <div class="canal-body-content">
+                    <p class="canal-desc"> Seguimos en todas las plataformas con un look renovado. Síguenos para
+                      estar al día de todas las novedades de Cofidis. </p>
+                    <div class="canal-img-mobile"> 
+                      <!-- Sustituir: /es/img/conocenos/rrss_logo_mobile.webp --> 
+                      <img src="/es/img/conocenos/rrss_logo_mobile.webp" alt="Redes Sociales Cofidis nueva imagen" loading="lazy"> </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- /col acordeón --> 
+        
+        <!-- ── Columna imagen desktop ── -->
+        <div class="col-md-7 canal-panel-col">
+          <div class="canal-panel"> 
+            
+            <!-- Slide App -->
+            <div class="canal-slide is-active" id="slide-app"> 
+              <!-- Sustituir: /es/img/conocenos/app_logo.webp --> 
+              <img src="/es/img/conocenos/app_logo.webp" alt="App Cofidis nueva imagen"> </div>
+            
+            <!-- Slide Email -->
+            <div class="canal-slide" id="slide-email"> 
+              <!-- Sustituir: /es/img/conocenos/email_logo.webp --> 
+              <img src="/es/img/conocenos/email_logo.webp" alt="Email Cofidis nueva imagen"> </div>
+            
+            <!-- Slide Redes Sociales -->
+            <div class="canal-slide" id="slide-rrss"> 
+              <!-- Sustituir: /es/img/conocenos/rrss_logo.webp --> 
+              <img src="/es/img/conocenos/rrss_logo.webp" alt="Redes Sociales Cofidis nueva imagen"> </div>
+          </div>
+        </div>
+        <!-- /col imagen --> 
+        
+      </div>
+      <!-- /row --> 
+    </div>
+    <!-- /container --> 
+  </section>
+</div>
+<!-- /.coes --> 
+
+<!-- ══════════════════════════════════════════════════════════
+     SCRIPTS
+     ══════════════════════════════════════════════════════════ --> 
+
+<script src="/es/js/splide.min.js"></script> 
+<script>
+
+/* ── REVEAL ───────────────────────────────────────────────── */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+
+/* ── VÍDEO ────────────────────────────────────────────────── */
+(function () {
+  const videoWrapper = document.getElementById('videoWrapper');
+  if (!videoWrapper) return;
+  const playBtn     = document.getElementById('playBtn');
+  const placeholder = videoWrapper.querySelector('.video-thumb-placeholder');
+  if (!playBtn) return;
+  playBtn.addEventListener('click', () => {
+    if (placeholder) placeholder.style.display = 'none';
+    playBtn.style.display = 'none';
+    videoWrapper.classList.add('playing');
+    if (!videoWrapper.querySelector('iframe')) {
+      videoWrapper.insertAdjacentHTML('beforeend',
+        `<iframe width="100%" style="aspect-ratio:16/9;display:block;"
+          src="https://www.youtube.com/embed/A3pOZF1oC4E?autoplay=1"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
+      );
+    }
+  });
+})();
+
+
+/* ── LOGOS STORYTELLING ───────────────────────────────────── */
+(function () {
+  const logosStage = document.getElementById('logosStage');
+  if (!logosStage) return;
+  const logoObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      logosStage.querySelectorAll('.logo-year[data-delay]').forEach(el => {
+        setTimeout(() => el.classList.add('show'), parseInt(el.dataset.delay) * 350);
+      });
+      logoObserver.unobserve(logosStage);
+    }
+  }, { threshold: 0.35 });
+  logoObserver.observe(logosStage);
+})();
+
+
+/* ── SCROLL STORY ─────────────────────────────────────────── */
+(function () {
+  const scrollStory = document.getElementById('scroll-story');
+  const logoFull    = document.getElementById('logoFull');
+  if (!scrollStory || !logoFull) return;
+
+  const steps = document.querySelectorAll('.story-step');
+  const logoPositions = [
+    'translate(-21%, -50%)',
+    'translate(-51%, -50%)',
+    'translate(-78%, -50%)',
+  ];
+  let currentStep = -1;
+
+  function setStep(idx) {
+    if (idx === currentStep) return;
+    currentStep = idx;
+    steps.forEach((s, i) => s.classList.toggle('active', i === idx));
+    logoFull.style.transform = logoPositions[idx];
+  }
+
+  const navH = 148;
+  function onScroll() {
+    const rect     = scrollStory.getBoundingClientRect();
+    const sectionH = scrollStory.offsetHeight;
+    const viewH    = window.innerHeight;
+    const progress = Math.max(0, Math.min(1, (-rect.top + navH) / (sectionH - viewH)));
+    if      (progress < 0.33) setStep(0);
+    else if (progress < 0.66) setStep(1);
+    else                       setStep(2);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+
+/* ── CANALES ──────────────────────────────────────────────── */
+(function () {
+  const triggers = document.querySelectorAll('#canalList .canal-trigger');
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const target = trigger.dataset.target;
+      const isAlreadyActive = trigger.classList.contains('is-active');
+
+      /* — Si ya está activo, no hacemos nada (siempre hay uno abierto) — */
+      if (isAlreadyActive) return;
+
+      /* — Desactivar todos — */
+      triggers.forEach(t => {
+        t.classList.remove('is-active');
+        t.setAttribute('aria-expanded', 'false');
+      });
+      document.querySelectorAll('#canalList .canal-body').forEach(b => b.classList.remove('is-open'));
+
+      /* — Activar el clicado — */
+      trigger.classList.add('is-active');
+      trigger.setAttribute('aria-expanded', 'true');
+      document.getElementById('body-' + target).classList.add('is-open');
+
+      /* — Cambiar imagen desktop — */
+      document.querySelectorAll('.canal-slide').forEach(s => s.classList.remove('is-active'));
+      document.getElementById('slide-' + target).classList.add('is-active');
+    });
+  });
+})();
+
+
+	
+</script>
